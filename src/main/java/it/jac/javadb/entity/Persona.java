@@ -194,7 +194,7 @@ public class Persona implements Serializable{
 		this.setId(id);
 		this.setNome(nome);
 		this.setCognome(cognome);
-		this.setNascita(data_nascita)// 4 Data da fpormattare bene
+		this.setNascita(data_nascita);// 4 Data da fpormattare bene
 		this.setTel(recapitoTelefonico);
 		this.setIndirizzo(indirizzoResidenza);
 		
@@ -216,5 +216,9 @@ public class Persona implements Serializable{
 				+ ", creationUser=" + creationUser + ", creationTime=" + creationTime + ", updateUser=" + updateUser
 				+ ", updateTime=" + updateTime + "]";
 	}
+	
+	
+
+
 
 }

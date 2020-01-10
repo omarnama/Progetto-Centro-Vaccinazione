@@ -5,9 +5,11 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 
-import it.jac.javadb.entity.Item;
+
+import it.jac.javadb.entity.Persona;
 import it.jac.javadb.util.HibernateUtil;
 
 public class PersonaDao {
@@ -58,7 +60,12 @@ public class PersonaDao {
 		
 	}
 	
-	public void updateItem(Persona persona) {
+	
+	//UPDATE PERSONA CON AGGIONRAMENRO CAMPI DA FARE QUI OPPURE
+	//Modificare una persona che c'è già!!
+	/*
+	 * 
+	public void updatePersona(Persona persona) {
 
 		log.debug("try to update persona " + persona);
 		
@@ -69,5 +76,33 @@ public class PersonaDao {
 		}
 		
 	}
+	*/
+	
+	
+	//RENDERE PERSISTENTI LE MODIFICHE E AVVIARE MODIFICA IN DB
+	
+	
+	
+	 public void update(Persona persona) {
 
+		log.debug("try to update persona " + persona);
+		
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+			Transaction tx = session.beginTransaction();
+			try {
+				
+				session.update(persona);
+				tx.commit();
+				log.debug("persona updated");
+				
+			} catch(Exception e) {
+				log.error("Error updating persona", e);
+				tx.rollback();
+			}
+		}
+
+
+	 }
 }
+

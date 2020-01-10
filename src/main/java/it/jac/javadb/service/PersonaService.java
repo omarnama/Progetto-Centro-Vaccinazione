@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.time.DateUtils;
 
-import it.jac.javadb.dao.ItemDao;
-import it.jac.javadb.entity.Item;
+
+import it.jac.javadb.dao.PersonaDao;
+import it.jac.javadb.entity.Persona;
 
 public class PersonaService {
 
@@ -17,14 +18,26 @@ public class PersonaService {
 	}
 
 	public void saveItem(Persona persona) {
-		
-		persona.setValidFrom(new Date());
-		persona.setValidTo(DateUtils.addDays(new Date(), 100));
+		//Da controllare
+		/*persona.setValidFrom(new Date());
+		  persona.setValidTo(DateUtils.addDays(new Date(), 100));
+	
+		*/
 		
 		persona.setCreationUser("system");
 		persona.setCreationTime(new Date());
 		
 		dao.save(persona);
 	}
+	
+	public void updatePersona(Persona persona) {
+
+		persona.setUpdateUser("system");
+		persona.setUpdateTime(new Date());
+		
+		dao.update(persona);
+	}
+	
+	
 
 }
