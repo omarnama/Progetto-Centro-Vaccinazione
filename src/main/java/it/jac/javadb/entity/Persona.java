@@ -1,6 +1,7 @@
 package it.jac.javadb.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,9 +18,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import it.jac.javadb.lezione1b.entity.Malattia;
+/*
+ * import it.jac.javadb.lezione1b.entity.Malattia;
 import it.jac.javadb.lezione1b.entity.Vaccinazione;
 import it.jac.javadb.lezione1b.entity.Vaccino;
+ */
 
 @Entity
 @Table(name = "persona")
@@ -67,7 +70,8 @@ public class Persona implements Serializable{
 
 	@Column(name = "cognome", length = 30)
 	private String cognome;
-
+	
+	// 1Data da fpormattare bene
 	@Column(name = "data_nascita")
 	private Date data_nascita;
 
@@ -77,10 +81,11 @@ public class Persona implements Serializable{
 	@Column(name = "indirizzo_residenza", length = 40)
 	private String indirizzo_residenza;
 
-
+/*
 	@Column(name = "validTo")
 	private Date validTo;
-
+*/
+	
 	@Column(name = "creation_user", length = 20)
 	private String creationUser;
 
@@ -116,11 +121,13 @@ public class Persona implements Serializable{
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-
+	
+	// 2 Data da fpormattare bene
 	public Date getNascita() {
 		return data_nascita;
 	}
-
+	
+	// 3  1Data da fpormattare bene
 	public void setNascita(Date data_nascita) {
 		this.data_nascita = data_nascita;
 	}
@@ -180,8 +187,29 @@ public class Persona implements Serializable{
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+	
+	/*Set persona parameters*/
+	public Persona(int id, String nome, String cognome, String data_Nascita, String recapitoTelefonico, String indirizzoResidenza) {
+		
+		this.setId(id);
+		this.setNome(nome);
+		this.setCognome(cognome);
+		this.setNascita(data_nascita)// 4 Data da fpormattare bene
+		this.setTel(recapitoTelefonico);
+		this.setIndirizzo(indirizzoResidenza);
+		
+		
+	}
+	
+	// 5 Data da fpormattare bene
+	public void setDataNascita(String data_nascita2) {
+		
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
+		data_nascita2=formatter.format(data_nascita2);
+	}
 
 	@Override
+	//da rivedere
 	public String toString() {
 		return "Item [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", data_nascita= " + data_nascita
 				+ ", recapito_telefonico=" + recapito_telefonico + ",  +  indirizzo_residenza=" + indirizzo_residenza

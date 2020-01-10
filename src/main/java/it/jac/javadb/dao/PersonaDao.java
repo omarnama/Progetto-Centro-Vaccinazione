@@ -10,9 +10,9 @@ import org.hibernate.query.NativeQuery;
 import it.jac.javadb.entity.Item;
 import it.jac.javadb.util.HibernateUtil;
 
-public class ItemDao {
+public class PersonaDao {
 
-	private static final Logger log = LogManager.getLogger(ItemDao.class);
+	private static final Logger log = LogManager.getLogger(PersonaDao.class);
 	
 	public boolean testConnessione() {
 		
@@ -30,15 +30,15 @@ public class ItemDao {
 		return result;
 	}
 
-	public List<Item> findAll() {
+	public List<Persona> findAll() {
 
 		log.debug("try to find all entities");
 		
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			
-			NativeQuery<Item> query = session.createNativeQuery("select * from item", Item.class);
+			NativeQuery<Persona> query = session.createNativeQuery("select * from persona", Persona.class);
 	
-			List<Item> list = query.list();
+			List<Persona> list = query.list();
 			
 			log.debug("found [" + list.size() + "] entities");
 			
@@ -46,26 +46,26 @@ public class ItemDao {
 		}
 	}
 
-	public void save(Item item) {
+	public void save(Persona persona) {
 
-		log.debug("try to save item " + item);
+		log.debug("try to save item " + persona);
 		
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-			session.save(item);
-			log.debug("item saved");
+			session.save(persona);
+			log.debug("persona saved");
 		}
 		
 	}
 	
-	public void updateItem(Item item) {
+	public void updateItem(Persona persona) {
 
-		log.debug("try to update item " + item);
+		log.debug("try to update persona " + persona);
 		
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
 			session.beginTransaction();
-			session.update(item);
+			session.update(persona);
 		}
 		
 	}
