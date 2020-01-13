@@ -102,7 +102,8 @@ public class PersonaDao {
 			}
 		}
 
-
 	 }
+	 
+	 public Persona findPersonaById(int id)
 }
 
