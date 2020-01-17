@@ -60,6 +60,13 @@ public class PersonaDao {
 			return list;
 		}
 	}
+	
+	/*Trova Persona tramite Id*/
+	public Persona findPersonaById (int id) {
+		try (Session session = HibernateUtil.getSessionFactory().openSession()){
+				return session.find(Persona.class, id);
+			}
+	} 
 
 	public void save(Persona persona) {
 
@@ -94,6 +101,7 @@ public class PersonaDao {
 	
 	//RENDERE PERSISTENTI LE MODIFICHE E AVVIARE MODIFICA IN DB, (con tx commit forse)
 	
+	/*Dao update che viene richiamato da Service nel momento dell'update in db, di campi*/
 	 public void update(Persona persona) {//Metodo Update per updatePersona in PersonaService
 
 		log.debug("try to update persona " + persona);
