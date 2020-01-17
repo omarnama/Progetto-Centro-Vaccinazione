@@ -26,7 +26,14 @@
 		<property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
 		<!-- mapping entita' -->
-		<mapping class="it.jac.javadb.entity.Item" />
+		<mapping class="it.jac.javadb.entity.Persona" />
+		<mapping class="it.jac.javadb.entity.Malattia" />
+		<mapping class="it.jac.javadb.entity.Vaccino" />
+		<mapping class="it.jac.javadb.entity.Vaccinazione" />
+		<mapping class="it.jac.javadb.entity.Vaccinato" />
+		<mapping class="it.jac.javadb.entity.Ammalato" />
+		<mapping class="it.jac.javadb.entity.Prevenzione" />
+		<mapping class="it.jac.javadb.entity.Somministrazione" />
 
 	</session-factory>
 </hibernate-configuration>

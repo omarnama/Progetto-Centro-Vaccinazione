@@ -127,7 +127,7 @@ public class Persona implements Serializable{
 		return data_nascita;
 	}
 	
-	// 3  1Data da fpormattare bene
+	// 3  Data da fpormattare bene
 	public void setNascita(Date data_nascita) {
 		this.data_nascita = data_nascita;
 	}
@@ -209,7 +209,7 @@ public class Persona implements Serializable{
 	}
 
 	@Override
-	//da rivedere
+	//da rivedere, dovrebbe andare bene Ven 17/01 15:48 on IoT Lesson
 	public String toString() {
 		return "Item [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", data_nascita= " + data_nascita
 				+ ", recapito_telefonico=" + recapito_telefonico + ",  +  indirizzo_residenza=" + indirizzo_residenza

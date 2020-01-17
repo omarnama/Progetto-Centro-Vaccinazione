@@ -8,16 +8,30 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import it.jac.javadb.dao.PersonaDao;
 import it.jac.javadb.entity.Persona;
+//import it.jac.javadb.esercitazione.entity.Documento;
 
 public class PersonaService {
 
 	private PersonaDao dao = new PersonaDao();
 	
-	public List<Persona> findAll() {
-		return dao.findAll();
-	}
+	/* JDBC
+	public void testConnessione() {
 
-	public void saveItem(Persona persona) {
+		log.info("Test connessione");
+
+		boolean test = dao.testConnessione();
+		if (test) {
+
+			log.info("Test OK");
+		}
+	}
+	*/
+	
+	/* Hibernate Connection */
+	
+	
+
+	public void savePersona(Persona persona) {
 		//Da controllare
 		/*persona.setValidFrom(new Date());
 		  persona.setValidTo(DateUtils.addDays(new Date(), 100));
@@ -38,6 +52,24 @@ public class PersonaService {
 		dao.update(persona);
 	}
 	
+	//Parte presada DOcumentoService da esercitazione COrretta usa Hoibernate per mettere i 3 metodi sotto
+	public List<Persona> findAll() {
+
+		return this.dao.findAll();
+	}
+
+	public void creaPersona(Persona per) {
+
+		per.setCreationTime(new Date());
+		per.setCreationUser("system");
+
+		dao.creaPersona(per);
+	}
+
+	public void eliminaPersona(Persona per) {
+
+		dao.eliminaPersona(per);
+	}
 	
 
 }

@@ -16,7 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import it.jac.javadb.lezione1b.entity.Persona;
+import it.jac.javadb.entity.Persona;
 
 
 @Entity

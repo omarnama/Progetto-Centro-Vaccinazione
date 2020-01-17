@@ -6,9 +6,10 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import it.jac.javadb.dao.ItemDao;
-import it.jac.javadb.entity.Item;
-import it.jac.javadb.service.ItemService;
+
+import it.jac.javadb.dao.PersonaDao;
+import it.jac.javadb.entity.Persona;
+import it.jac.javadb.service.PersonaService;
 import it.jac.javadb.util.HibernateUtil;
 import it.jac.javadb.util.Utils;
 
@@ -27,14 +28,17 @@ public class MainApp {
 			System.out.println("Scegliere la funzione: ");
 			Scanner in = new Scanner(System.in);
 			String s = in.nextLine();
-
+			
+			PersonaService dao = new PersonaService();
+			PersonaDao dao1 = new PersonaDao();
+			
 			switch (s) {
 			case "1": {
 
 				System.out.println("Test connessione");
-				ItemDao dao = new ItemDao();
 				
-				boolean test = dao.testConnessione();
+				
+				boolean test = dao1.testConnessione();
 				if (test) {
 				
 					log.info("Test OK");
@@ -46,8 +50,8 @@ public class MainApp {
 
 				System.out.println("Stampa lista");
 
-				ItemService service = new ItemService();
-				List<Item> list = service.findAll();
+				PersonaService service = new PersonaService();
+				List<Persona> list = service.findAll();
 				
 				Utils.stampaLista(list);
 				break;
