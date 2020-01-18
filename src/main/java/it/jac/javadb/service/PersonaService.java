@@ -82,6 +82,7 @@ public class PersonaService {//implements Iterator <Persona>
 		return this.dao.findAll();
 	}
 
+	/*Da rivedere*/
 	public Persona creaPersona(Scanner s, int id) {//Persona per
 		
 		String nome, cognome, dataNascita, recapitoTelefonico, indirizzoResidenza;
@@ -109,9 +110,9 @@ public class PersonaService {//implements Iterator <Persona>
 		persona.setDataNascita(dataNascita);//da rivedere in Persona entity ecc...
 		persona.setTel(recapitoTelefonico);
 		persona.setIndirizzo(indirizzoResidenza);
-		persona.setId(6);
+		persona.setId(7);
 		persona.setCreationTime(new Date());
-		persona.setCreationUser("admin");
+		persona.setCreationUser("Amministratore");
 		
 		dao.creaPersona(persona);
 		
@@ -131,7 +132,48 @@ public class PersonaService {//implements Iterator <Persona>
 		dao.creaPersona(per);
 		*/
 	}
-
+	
+	/*Da rivedere*/
+	public Persona modificaPersona (Scanner s, int id) {
+		String nome, cognome, dataNascita, recapitoTelefonico, indirizzoResidenza;
+		
+		System.out.println("Inserisci l'id della persona da modifcare: " + id);
+		
+		System.out.println("Inserisci il nome:");
+		nome=s.next();
+		
+		System.out.println("Inserisci il cognome");
+		cognome=s.next();
+		
+		System.out.println("Inserisci data di nascita");
+		dataNascita = s.next();
+		
+		System.out.println("Inserisci numero telefonico");
+		recapitoTelefonico = s.next();
+		
+		System.out.println("Inserisci indirizzo di residenza");
+		indirizzoResidenza = s.nextLine();
+		
+		Persona persona = new Persona();
+		persona.setNome(nome);
+		persona.setCognome(cognome);
+		persona.setDataNascita(dataNascita);
+		persona.setTel(recapitoTelefonico);
+		persona.setIndirizzo(indirizzoResidenza);
+		persona.setId(id);
+		persona.setCreationUser("Amministratore");
+		persona.setCreationTime(new Date());
+		
+		dao.creaPersona(persona);
+		
+		return persona;
+		
+		
+		return persona;
+		
+	}
+	
+	/*Da completare*/
 	public void eliminaPersona(Persona per) {
 
 		dao.eliminaPersona(per);

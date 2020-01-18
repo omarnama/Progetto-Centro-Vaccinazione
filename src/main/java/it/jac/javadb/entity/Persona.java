@@ -1,6 +1,7 @@
 package it.jac.javadb.entity;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -76,7 +77,7 @@ public class Persona implements Serializable{
 	
 	// 1Data da fpormattare bene
 	@Column(name = "data_nascita")
-	private Date dataNascita;
+	private String dataNascita;
 
 	@Column(name = "recapito_telefonico", length = 20)
 	private String recapitoTelefonico;
@@ -126,12 +127,12 @@ public class Persona implements Serializable{
 	}
 	
 	// 2 Data da fpormattare bene
-	public Date getNascita() {
+	public String getNascita() {
 		return dataNascita;
 	}
 	
 	// 3  Data da fpormattare bene
-	public void setNascita(Date data_nascita) {
+	public void setNascita(String data_nascita) {
 		this.dataNascita = data_nascita;
 	}
 
@@ -191,18 +192,56 @@ public class Persona implements Serializable{
 		this.updateTime = updateTime;
 	}
 	
-	/*Set persona parameters*/
-	public Persona Persona(int id, String nome, String cognome, String data_Nascita, String recapitoTelefonico, String indirizzoResidenza) {
+	/*Costruttore Set persona parameters*/
+	public Persona(int id, String nome, String cognome, String data_Nascita, String recapitoTelefonico, String indirizzoResidenza) {
 		
 		this.setId(id);
 		this.setNome(nome);
 		this.setCognome(cognome);
-		this.setNascita(data_nascita);// 4 Data da fpormattare bene
+		this.setNascita(data_Nascita);// 4 Data da fpormattare bene
 		this.setTel(recapitoTelefonico);
 		this.setIndirizzo(indirizzoResidenza);
+		 
 		
 		
 	}
+	
+	/*from S Persona - diviso in 2 parti metà sotto metodo Persona (usato per creare persona in PersonaDao) e meta infondo*/
+	/*
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public String getRecapitoTelefonico() {
+		return recapitoTelefonico;
+	}
+
+	public void setRecapitoTelefonico(String recapitoTelefonico) {
+		this.recapitoTelefonico = recapitoTelefonico;
+	}
+
+	public String getIndirizzoResidenza() {
+		return indirizzoResidenza;
+	}
+
+	public void setIndirizzoResidenza(String indirizzoResidenza) {
+		this.indirizzoResidenza = indirizzoResidenza;
+	}
+
+	public java.sql.Date getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(String dataNascita) throws ParseException {
+		this.dataNascita = java.sql.Date.valueOf(dataNascita);
+	}
+	*/
+	
+	
 	
 	// 5 Data da fpormattare bene
 	public void setDataNascita(String data_nascita2) {
@@ -214,7 +253,7 @@ public class Persona implements Serializable{
 	@Override
 	//da rivedere, dovrebbe andare bene Ven 17/01 15:48 on IoT Lesson
 	public String toString() {
-		return "Item [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", data_nascita= " + data_nascita
+		return "Item [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", data_nascita= " + dataNascita
 				+ ", recapito_telefonico=" + recapitoTelefonico + ",  +  indirizzo_residenza=" + indirizzoResidenza
 				+ ", creationUser=" + creationUser + ", creationTime=" + creationTime + ", updateUser=" + updateUser
 				+ ", updateTime=" + updateTime + "]";

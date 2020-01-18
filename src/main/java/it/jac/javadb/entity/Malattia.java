@@ -45,6 +45,13 @@ public class Malattia {
 		@Column(name = "id")
 		private int id;
 		
+		@Override
+		public String toString() {
+			return "[id=" + id + ", tipo=" + tipo + ", nome=" + nome + ", creationUser=" + creationUser
+					+ ", updateUser=" + updateUser + ", creationTime=" + creationTime + ", updateTime=" + updateTime
+					+ "]";
+		}
+
 		@Column(name = "tipo", length = 30)
 		private String tipo;
 		
@@ -124,6 +131,10 @@ public class Malattia {
 			return this.persone;
 		}
 		
+		public void setPersone(Set<Persona> persone) {
+			this.persone = persone;
+		}
+		
 		//metodo int hashCode
 		
 		
@@ -131,10 +142,7 @@ public class Malattia {
 
 		
 		//ricontrolla secondo tabella e file word
-		@Override
-		public String toString() {
-			return "id: " + id + ", nome: " + nome + ", tipo: " + tipo + ", creation time: " + creationTime +
-		}
+
 
 /* da completare */
 
