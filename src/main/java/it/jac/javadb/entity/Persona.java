@@ -24,6 +24,9 @@ import it.jac.javadb.lezione1b.entity.Vaccinazione;
 import it.jac.javadb.lezione1b.entity.Vaccino;
  */
 
+/* Classe Entita si occupa di dichiarare la tabella ele sue relazioni con le altre e i suoi campi, GET e SET, il metodo toString
+ * e metodo hashCode ecc... vedi ....  */
+
 @Entity
 @Table(name = "persona")
 public class Persona implements Serializable{

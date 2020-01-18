@@ -16,6 +16,8 @@ import it.jac.javadb.entity.Persona;
 //import it.jac.javadb.esercitazione.entity.Documento;
 import it.jac.javadb.util.HibernateUtil;
 
+/* Classe DAO si occupa di comunicare con la tabella, e inserimento record e collegamento con Service(dove c'è la logica) */
+
 public class PersonaDao {
 	
 

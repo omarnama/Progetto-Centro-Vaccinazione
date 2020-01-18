@@ -11,6 +11,8 @@ import it.jac.javadb.dao.PersonaDao;
 import it.jac.javadb.entity.Persona;
 //import it.jac.javadb.esercitazione.entity.Documento;
 
+/* Classe Service dove si diachiara la logica della tabella, test connesione al db, inserimento modifica, cancellazione 
+ * e aggiornamento rifacendosi alla classe DAO */
 
 public class PersonaService {
 	
