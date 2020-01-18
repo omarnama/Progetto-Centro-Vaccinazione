@@ -136,9 +136,65 @@ public class Malattia {
 		}
 		
 		//metodo int hashCode
-		
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((creationTime == null) ? 0 : creationTime.hashCode());
+			result = prime * result + ((creationUser == null) ? 0 : creationUser.hashCode());
+			result = prime * result + id;
+			result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+			result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
+			result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
+			return result;
+		}
 		
 		//bollean equals
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Malattia other = (Malattia) obj;
+			if (creationTime == null) {
+				if (other.creationTime != null)
+					return false;
+			} else if (!creationTime.equals(other.creationTime))
+				return false;
+			if (creationUser == null) {
+				if (other.creationUser != null)
+					return false;
+			} else if (!creationUser.equals(other.creationUser))
+				return false;
+			if (id != other.id)
+				return false;
+			if (nome == null) {
+				if (other.nome != null)
+					return false;
+			} else if (!nome.equals(other.nome))
+				return false;
+			if (tipo == null) {
+				if (other.tipo != null)
+					return false;
+			} else if (!tipo.equals(other.tipo))
+				return false;
+			if (updateTime == null) {
+				if (other.updateTime != null)
+					return false;
+			} else if (!updateTime.equals(other.updateTime))
+				return false;
+			if (updateUser == null) {
+				if (other.updateUser != null)
+					return false;
+			} else if (!updateUser.equals(other.updateUser))
+				return false;
+			return true;
+		}
+		
+		
 
 		
 		//ricontrolla secondo tabella e file word
