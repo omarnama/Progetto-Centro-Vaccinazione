@@ -1,7 +1,9 @@
 package it.jac.javadb.service;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +16,7 @@ import it.jac.javadb.entity.Persona;
 /* Classe Service dove si diachiara la logica della tabella, test connesione al db, inserimento modifica, cancellazione 
  * e aggiornamento rifacendosi alla classe DAO */
 
-public class PersonaService {
+public class PersonaService {//implements Iterator <Persona>
 	
 	private static final Logger log = LogManager.getLogger(PersonaService.class);
 	private PersonaDao dao = new PersonaDao();
@@ -31,7 +33,9 @@ public class PersonaService {
 		}
 	}
 	 */
-
+	
+	Scanner s = new Scanner (System.in);
+	
 	/* Prova Hibernate Test Connessione*/
 	public void testConnessione() {
 
@@ -78,12 +82,54 @@ public class PersonaService {
 		return this.dao.findAll();
 	}
 
-	public void creaPersona(Persona per) {
+	public Persona creaPersona(Scanner s, int id) {//Persona per
+		
+		String nome, cognome, dataNascita, recapitoTelefonico, indirizzoResidenza;
+		
+		System.out.println("Crea persona");
 
+		System.out.println("Inserisci il nome:");
+		nome = s.nextLine();
+		
+		System.out.println("Inserisci il cognome:");
+		cognome = s.nextLine();
+		
+		System.out.println("Inserisci la data di nascita:");
+		dataNascita = s.nextLine();
+		
+		System.out.println("Inserisci il recapito telefonico:");
+		recapitoTelefonico = s.nextLine();
+		
+		System.out.println("Inserisci l'indirizzo di residenza:");
+		indirizzoResidenza = s.nextLine();
+		
+		Persona persona = new Persona();//si collega a metodo Set Persona parameters
+		persona.setNome(nome);
+		persona.setCognome(cognome);
+		persona.setDataNascita(dataNascita);//da rivedere in Persona entity ecc...
+		persona.setTel(recapitoTelefonico);
+		persona.setIndirizzo(indirizzoResidenza);
+		persona.setId(6);
+		persona.setCreationTime(new Date());
+		persona.setCreationUser("admin");
+		
+		dao.creaPersona(persona);
+		
+		return persona;	
+		
+		
+		/*mio*/
+		/*
+		System.out.println("Inseerisci nome Persona:");
+		//s.nextLine();
+		
+		per.setNome(s.nextLine());
+		
 		per.setCreationTime(new Date());
 		per.setCreationUser("system");
 
 		dao.creaPersona(per);
+		*/
 	}
 
 	public void eliminaPersona(Persona per) {

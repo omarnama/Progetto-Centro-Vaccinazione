@@ -76,13 +76,13 @@ public class Persona implements Serializable{
 	
 	// 1Data da fpormattare bene
 	@Column(name = "data_nascita")
-	private Date data_nascita;
+	private Date dataNascita;
 
 	@Column(name = "recapito_telefonico", length = 20)
-	private String recapito_telefonico;
+	private String recapitoTelefonico;
 
 	@Column(name = "indirizzo_residenza", length = 40)
-	private String indirizzo_residenza;
+	private String indirizzoResidenza;
 
 /*
 	@Column(name = "validTo")
@@ -127,28 +127,28 @@ public class Persona implements Serializable{
 	
 	// 2 Data da fpormattare bene
 	public Date getNascita() {
-		return data_nascita;
+		return dataNascita;
 	}
 	
 	// 3  Data da fpormattare bene
 	public void setNascita(Date data_nascita) {
-		this.data_nascita = data_nascita;
+		this.dataNascita = data_nascita;
 	}
 
 	public String getTel() {
-		return recapito_telefonico;
+		return recapitoTelefonico;
 	}
 
 	public void setTel(String recapito_telefonico) {
-		this.recapito_telefonico = recapito_telefonico;
+		this.recapitoTelefonico = recapito_telefonico;
 	}
 
 	public String getIndirizzo() {
-		return indirizzo_residenza;
+		return indirizzoResidenza;
 	}
 
 	public void setIndirizzo(String indirizzo_residenza) {
-		this.indirizzo_residenza = indirizzo_residenza;
+		this.indirizzoResidenza = indirizzo_residenza;
 	}
 
 	/*	public Date getValidTo() {
@@ -192,7 +192,7 @@ public class Persona implements Serializable{
 	}
 	
 	/*Set persona parameters*/
-	public Persona(int id, String nome, String cognome, String data_Nascita, String recapitoTelefonico, String indirizzoResidenza) {
+	public Persona Persona(int id, String nome, String cognome, String data_Nascita, String recapitoTelefonico, String indirizzoResidenza) {
 		
 		this.setId(id);
 		this.setNome(nome);
@@ -215,7 +215,7 @@ public class Persona implements Serializable{
 	//da rivedere, dovrebbe andare bene Ven 17/01 15:48 on IoT Lesson
 	public String toString() {
 		return "Item [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", data_nascita= " + data_nascita
-				+ ", recapito_telefonico=" + recapito_telefonico + ",  +  indirizzo_residenza=" + indirizzo_residenza
+				+ ", recapito_telefonico=" + recapitoTelefonico + ",  +  indirizzo_residenza=" + indirizzoResidenza
 				+ ", creationUser=" + creationUser + ", creationTime=" + creationTime + ", updateUser=" + updateUser
 				+ ", updateTime=" + updateTime + "]";
 	}
