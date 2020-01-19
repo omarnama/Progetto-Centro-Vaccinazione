@@ -137,13 +137,13 @@ public class PersonaDao {
 			}
 		}
 		
-		public void eliminaPersona(Persona persona) {
+		public void eliminaPersona(int idPer) {
 			
 			try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 				
 				Transaction tx = session.beginTransaction();
 				
-				session.delete(persona);
+				session.delete(idPer);
 				
 				tx.commit();
 			}

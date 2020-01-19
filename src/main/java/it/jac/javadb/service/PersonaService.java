@@ -1,5 +1,6 @@
 package it.jac.javadb.service;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import it.jac.javadb.dao.PersonaDao;
 import it.jac.javadb.entity.Persona;
 //import it.jac.javadb.esercitazione.entity.Documento;
+import it.jac.javadb.lezione1b.util.Utils;
 
 /* Classe Service dove si diachiara la logica della tabella, test connesione al db, inserimento modifica, cancellazione 
  * e aggiornamento rifacendosi alla classe DAO */
@@ -173,11 +175,31 @@ public class PersonaService {//implements Iterator <Persona>
 		
 	}
 	
-	/*Da completare*/
-	public void eliminaPersona(Persona per) {
-
-		dao.eliminaPersona(per);
+	/*Da controllare se giusto!!*/
+	public void eliminaPersona(int idPer, List<Persona> persone) {
+		Scanner n = new Scanner (System.in);
+		//PersonaService pser = new PersonaService();
+		Persona p = findPersonaById(idPer);
+		
+		dao.eliminaPersona(idPer);
+		
+		for(Persona persona : persone) {
+			if(persona.equals(p)){
+				persone.remove(persona);
+			}
+		}
 	}
+	
+	/*Metodo stampaLista che si collega a Utils (stampa lista persone arraylist) */
+	public void stampaPersona(int idPer) {
 
+		System.out.println("Stampa lista persone (ArrayList) ");
+
+		Persona persona = dao.findPersonaById(idPer);
+		
+		it.jac.javadb.util.Utils u = new it.jac.javadb.util.Utils();
+		
+		u.stampaListaPersone(Arrays.asList(persona));
+	}
 
 }
