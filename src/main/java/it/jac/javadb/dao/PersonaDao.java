@@ -57,7 +57,7 @@ public class PersonaDao {
 			Query<Persona> query = session
 					.createQuery("INSERT INTO Persona", Persona.class);
 
-			query.setParameter("data", date);
+			query.setParameter("Id", 1), query.setParameter(position, value);
 			
 			List<Persona> list = query.list();
 

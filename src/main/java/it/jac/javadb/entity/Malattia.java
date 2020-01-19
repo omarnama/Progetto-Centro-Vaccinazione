@@ -18,10 +18,10 @@ import javax.persistence.Table;
 
 import it.jac.javadb.entity.Persona;
 
-
 @Entity
 @Table(name = "malattia")
 public class Malattia {
+	
 	@ManyToMany(cascade=CascadeType.ALL, targetEntity = Persona.class, fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "ammalato",
@@ -44,13 +44,6 @@ public class Malattia {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "id")
 		private int id;
-		
-		@Override
-		public String toString() {
-			return "[id=" + id + ", tipo=" + tipo + ", nome=" + nome + ", creationUser=" + creationUser
-					+ ", updateUser=" + updateUser + ", creationTime=" + creationTime + ", updateTime=" + updateTime
-					+ "]";
-		}
 
 		@Column(name = "tipo", length = 30)
 		private String tipo;
@@ -133,6 +126,13 @@ public class Malattia {
 		
 		public void setPersone(Set<Persona> persone) {
 			this.persone = persone;
+		}
+		
+		@Override
+		public String toString() {
+			return "[id=" + id + ", tipo=" + tipo + ", nome=" + nome + ", creationUser=" + creationUser
+					+ ", updateUser=" + updateUser + ", creationTime=" + creationTime + ", updateTime=" + updateTime
+					+ "]";
 		}
 		
 		//metodo int hashCode
