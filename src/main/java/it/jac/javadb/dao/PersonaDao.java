@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
-
+import org.hibernate.query.Query;
 
 import it.jac.javadb.entity.Persona;
 //import it.jac.javadb.esercitazione.entity.Documento;
@@ -52,7 +52,21 @@ public class PersonaDao {
 	public void creaPersona(Persona persona) {
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			
+			
+			Query<Persona> query = session
+					.createQuery("INSERT INTO Persona", Persona.class);
 
+			query.setParameter("data", date);
+			
+			List<Persona> list = query.list();
+
+			log.debug("found [" + list.size() + "] entities");
+
+			return list;
+
+			
+			
 			Transaction tx = session.beginTransaction();
 
 			session.persist(persona);
