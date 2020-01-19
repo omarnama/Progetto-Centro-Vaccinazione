@@ -12,8 +12,6 @@ import org.apache.logging.log4j.Logger;
 
 import it.jac.javadb.dao.PersonaDao;
 import it.jac.javadb.entity.Persona;
-//import it.jac.javadb.esercitazione.entity.Documento;
-import it.jac.javadb.lezione1b.util.Utils;
 
 /* Classe Service dove si diachiara la logica della tabella, test connesione al db, inserimento modifica, cancellazione 
  * e aggiornamento rifacendosi alla classe DAO */
@@ -52,19 +50,9 @@ public class PersonaService {//implements Iterator <Persona>
 
 
 
-	public void savePersona(Persona persona) {
-		//Da controllare
-		/*persona.setValidFrom(new Date());
-		  persona.setValidTo(DateUtils.addDays(new Date(), 100));
-
-		 */
-
-		persona.setCreationUser("system");
-		persona.setCreationTime(new Date());
-
-		dao.save(persona);
-	}
-
+	
+	
+	/*
 	public void updatePersona(Persona persona) {
 
 		persona.setUpdateUser("system");
@@ -72,6 +60,7 @@ public class PersonaService {//implements Iterator <Persona>
 
 		dao.update(persona);
 	}
+	*/
 
 	//Parte presa da javadbOrm 28 11 ItemService
 	public Persona findPersonaById(int id) {
@@ -166,13 +155,24 @@ public class PersonaService {//implements Iterator <Persona>
 		persona.setCreationUser("Amministratore");
 		persona.setCreationTime(new Date());
 		
-		dao.creaPersona(persona);
+		dao.updatePersona(persona);
 		
 		return persona;
 		
 		
-		return persona;
-		
+	}
+	
+	public void savePersona(Persona persona) {
+		//Da controllare
+		/*persona.setValidFrom(new Date());
+		  persona.setValidTo(DateUtils.addDays(new Date(), 100));
+
+		 */
+
+		persona.setCreationUser("system");
+		persona.setCreationTime(new Date());
+
+		dao.save(persona);
 	}
 	
 	/*Da controllare se giusto!!*/

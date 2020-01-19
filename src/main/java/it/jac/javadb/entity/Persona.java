@@ -243,6 +243,10 @@ public class Persona implements Serializable{
 	
 	
 	
+	public Persona() {
+		// TODO Auto-generated constructor stub
+	}
+
 	// 5 Data da fpormattare bene
 	public void setDataNascita(String data_nascita2) {
 		
