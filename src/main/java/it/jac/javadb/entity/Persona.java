@@ -89,13 +89,14 @@ public class Persona implements Serializable{
 	@Column(name = "validTo")
 	private Date validTo;
 */
+	@Column(name = "creation_time")
+	private Date creationTime;
+
 	
 	@Column(name = "creation_user", length = 20)
 	private String creationUser;
 
-	@Column(name = "creation_time")
-	private Date creationTime;
-
+	
 	@Column(name = "update_user", length = 20)
 	private String updateUser;
 

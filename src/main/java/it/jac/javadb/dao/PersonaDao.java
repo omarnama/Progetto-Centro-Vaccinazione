@@ -51,40 +51,46 @@ public class PersonaDao {
 
 	/*Metodo crea Persona in Tabella DB da completare con Hibernate SQL*/
 	public List<Persona> creaPersona(Persona persona) {
-
+		Scanner n = new Scanner(System.in);
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			Scanner n = new Scanner(System.in);
+			
 			
 			Query<Persona> query = session
 					.createQuery("INSERT INTO Persona", Persona.class);
 			System.out.println("Inserisci id persona:");
-			query.setParameter("id", n.next()); 
+			query.setParameter(1, persona.getId()); 
+			//query.setParameter(position, value)
 			System.out.println("Inserisci nome persona:");
-			query.setParameter("nome", n.next());
+			query.setParameter(2, persona.getNome());
 			System.out.println("Inserisci cognome persona:");
-			query.setParameter("cognome", n.next());
+			query.setParameter(3, persona.getCognome());
 			System.out.println("Inserisci data di nascita persona:");
-			query.setParameter("data_nascita", n.next());
+			query.setParameter(4, persona.getNascita());
 			System.out.println("Inserisci numero di telefono della persona:");
-			query.setParameter("recapito_telefonico", n.next());
+			query.setParameter(5, persona.getTel());
 			System.out.println("Inserisci indirizzo di residenza della persona:");
-			query.setParameter("indirizzo_residenza", n.next());
-			query.setParameter("creation_time", persona.getCreationTime());//.getTime()
-			query.setParameter("creation_user", persona.getCreationUser());
+			query.setParameter(6, persona.getIndirizzo());
+			System.out.println("Inserimento automatico dell'ora alla creazione dell record");
+			query.setParameter(7, persona.getCreationTime());//.getTime()
+			System.out.println("Inserimento automatico dell'utente alla creazione dell record");
+			query.setParameter(8, persona.getCreationUser());
 			
 			List<Persona> list = query.list();
 
-			log.debug("found [" + query.list.size() + "] entities");//query.getQueryString()
+			log.debug("found [" + query.list() + "] entities");//query.getQueryString()
 
-			return query.list();;
+			return query.list();
 
 			
 			
+			
+			//Transaction tx = session.beginTransaction();
 			Transaction tx = session.beginTransaction();
-
 			session.persist(persona);
 
 			tx.commit();
+			
+			
 		}
 	}
 
