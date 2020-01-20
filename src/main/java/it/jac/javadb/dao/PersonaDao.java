@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,21 +50,33 @@ public class PersonaDao {
 	//Metodi ni riferimento a PersonaService
 
 	/*Metodo crea Persona in Tabella DB da completare con Hibernate SQL*/
-	public void creaPersona(Persona persona) {
+	public List<Persona> creaPersona(Persona persona) {
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			
+			Scanner n = new Scanner(System.in);
 			
 			Query<Persona> query = session
 					.createQuery("INSERT INTO Persona", Persona.class);
-
-			query.setParameter("Id", 1), query.setParameter(position, value);
+			System.out.println("Inserisci id persona:");
+			query.setParameter("id", n.next()); 
+			System.out.println("Inserisci nome persona:");
+			query.setParameter("nome", n.next());
+			System.out.println("Inserisci cognome persona:");
+			query.setParameter("cognome", n.next());
+			System.out.println("Inserisci data di nascita persona:");
+			query.setParameter("data_nascita", n.next());
+			System.out.println("Inserisci numero di telefono della persona:");
+			query.setParameter("recapito_telefonico", n.next());
+			System.out.println("Inserisci indirizzo di residenza della persona:");
+			query.setParameter("indirizzo_residenza", n.next());
+			query.setParameter("creation_time", persona.getCreationTime());//.getTime()
+			query.setParameter("creation_user", persona.getCreationUser());
 			
 			List<Persona> list = query.list();
 
-			log.debug("found [" + list.size() + "] entities");
+			log.debug("found [" + query.list.size() + "] entities");//query.getQueryString()
 
-			return list;
+			return query.list();;
 
 			
 			
