@@ -76,6 +76,8 @@ public class PersonaService {//implements Iterator <Persona>
 	/*Da rivedere*/
 	public Persona creaPersona(Scanner s, int id) {//Persona per
 		
+		
+			
 		String nome, cognome, dataNascita, recapitoTelefonico, indirizzoResidenza;
 		
 		System.out.println("Crea persona");

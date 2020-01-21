@@ -30,7 +30,7 @@ public class Utils {
 		}
 		
 }
-		/*
+		
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("-----------------------------------------------------------\n");//per sintassi vedi Utils di javadbOrm 05 12
@@ -38,17 +38,27 @@ public class Utils {
 
 			sb
 			.append("|")
-			.append(StringUtils.rightPad(bean.getId(), 15))
+			.append(StringUtils.rightPad(bean.getId(), 10))
 			.append("|")
-			.append(StringUtils.rightPad(bean.getName(), 30))
+			.append(StringUtils.rightPad(bean.getNome(), 30))
 			.append("|")
-			.append(StringUtils.rightPad(bean.getDescription(), 50));
+			.append(StringUtils.rightPad(bean.getTel(), 50));
+			.append("|")
+			.append(StringUtils.rightPad(bean.getIndirizzo(), 50));
+			.append("|")
+			.append(StringUtils.rightPad(bean.getCreationTime()));
+			.append("|")
+			.append(StringUtils.rightPad(bean.getCreationUser()));
+			.append("|")
+			.append(StringUtils.rightPad(bean.getUpdateTime()));
+			.append("|")
+			.append(StringUtils.rightPad(bean.getUpdateUser()));
 			sb.append("\n");
 		}
 		sb.append("-----------------------------------------------------------");	
 		System.out.println(sb.toString());
-		*/
 		
+		}
 	
-
+		}
 

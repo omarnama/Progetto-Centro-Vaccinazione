@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
@@ -52,8 +53,12 @@ public class PersonaDao {
 	/*Metodo crea Persona in Tabella DB da completare con Hibernate SQL*/
 	public List<Persona> creaPersona(Persona persona) {
 		Scanner n = new Scanner(System.in);
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+		Transaction tx = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try  {
 			
+			tx = session.beginTransaction();
+			//Persona persona = new Persona()
 			
 			Query<Persona> query = session
 					.createQuery("INSERT INTO Persona", Persona.class);
@@ -71,28 +76,26 @@ public class PersonaDao {
 			System.out.println("Inserisci indirizzo di residenza della persona:");
 			query.setParameter(6, persona.getIndirizzo());
 			System.out.println("Inserimento automatico dell'ora alla creazione dell record");
-			query.setParameter(7, persona.getCreationTime());//.getTime()
+			query.setParameter(7, new java.sql.Timestamp(persona.getCreationTime().getTime()));//.getTime()
 			System.out.println("Inserimento automatico dell'utente alla creazione dell record");
 			query.setParameter(8, persona.getCreationUser());
 			
-			List<Persona> list = query.list();
+			//List<Persona> list = query.list();
 
 			log.debug("found [" + query.list() + "] entities");//query.getQueryString()
 
-			return query.list();
-
 			
-			
-			
-			//Transaction tx = session.beginTransaction();
-			Transaction tx = session.beginTransaction();
-			session.persist(persona);
-
 			tx.commit();
-			
-			
-		}
-	}
+			return query.list();
+	      } catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      } finally {
+	         session.close(); 
+	      }
+	      //return persona;
+	   }
+	
 
 	/*Trova Persona tramite Id*/
 	public Persona findPersonaById (int id) {
@@ -118,14 +121,18 @@ public class PersonaDao {
 
 	/*Dao update che viene richiamato da Service nel momento dell'update in db, di campi*/
 	public void updatePersona(Persona persona) {//Metodo Update per updatePersona in PersonaService
-
+		/*
+		Transaction tx = null;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		*/
 		log.debug("try to update persona " + persona);
+		
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
 			Transaction tx = session.beginTransaction();
 			try {
-
+				
 				session.update(persona);
 				tx.commit();
 				log.debug("persona updated");
