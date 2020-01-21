@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import it.jac.javadb.entity.Persona;
 import it.jac.javadb.entity.Vaccino;
 
-
 @Entity
 @Table(name="vaccinazione")
 public class Vaccinazione {

@@ -2,6 +2,7 @@
 
 package it.jac.javadb.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name ="prevenzione")
-public class Prevenzione {
+public class Prevenzione implements Serializable{
 	
 	@Id
 	@Column(name="idmalattia")
@@ -85,6 +86,55 @@ public class Prevenzione {
 	public String toString() {
 		return "Prevenzione [idmalattia=" + idmalattia + ", idvaccino=" + idvaccino + ", creationUser=" + creationUser
 				+ ", updateUser=" + updateUser + ", creationTime=" + creationTime + ", updateTime=" + updateTime + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((creationTime == null) ? 0 : creationTime.hashCode());
+		result = prime * result + ((creationUser == null) ? 0 : creationUser.hashCode());
+		result = prime * result + idmalattia;
+		result = prime * result + idvaccino;
+		result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
+		result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Prevenzione other = (Prevenzione) obj;
+		if (creationTime == null) {
+			if (other.creationTime != null)
+				return false;
+		} else if (!creationTime.equals(other.creationTime))
+			return false;
+		if (creationUser == null) {
+			if (other.creationUser != null)
+				return false;
+		} else if (!creationUser.equals(other.creationUser))
+			return false;
+		if (idmalattia != other.idmalattia)
+			return false;
+		if (idvaccino != other.idvaccino)
+			return false;
+		if (updateTime == null) {
+			if (other.updateTime != null)
+				return false;
+		} else if (!updateTime.equals(other.updateTime))
+			return false;
+		if (updateUser == null) {
+			if (other.updateUser != null)
+				return false;
+		} else if (!updateUser.equals(other.updateUser))
+			return false;
+		return true;
 	}
 
 }

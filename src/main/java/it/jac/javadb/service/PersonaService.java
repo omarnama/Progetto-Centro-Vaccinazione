@@ -1,5 +1,7 @@
 package it.jac.javadb.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
@@ -9,9 +11,12 @@ import java.util.Scanner;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
 
 import it.jac.javadb.dao.PersonaDao;
 import it.jac.javadb.entity.Persona;
+import it.jac.javadb.service.PersonaService;
+import it.jac.javadb.util.DaoFactory;
 
 /* Classe Service dove si diachiara la logica della tabella, test connesione al db, inserimento modifica, cancellazione 
  * e aggiornamento rifacendosi alla classe DAO */
@@ -19,10 +24,13 @@ import it.jac.javadb.entity.Persona;
 public class PersonaService {//implements Iterator <Persona>
 	
 	private static final Logger log = LogManager.getLogger(PersonaService.class);
-	private PersonaDao dao = new PersonaDao();
+	private static PersonaDao dao = new PersonaDao();
+	
+	//private PersonaDao dao1 = DaoFactory.createPersonaHQLDao();
 
-	/* JDBC
-	public void testConnessione() {
+	/*
+	// JDBC
+	public void testConnection() {
 
 		log.info("Test connessione");
 
@@ -32,7 +40,8 @@ public class PersonaService {//implements Iterator <Persona>
 			log.info("Test OK");
 		}
 	}
-	 */
+	*/
+	 
 	
 	Scanner s = new Scanner (System.in);
 	
@@ -49,85 +58,39 @@ public class PersonaService {//implements Iterator <Persona>
 	}
 
 
-
-	
-	
-	/*
-	public void updatePersona(Persona persona) {
-
-		persona.setUpdateUser("system");
-		persona.setUpdateTime(new Date());
-
-		dao.update(persona);
-	}
-	*/
-
 	//Parte presa da javadbOrm 28 11 ItemService
 	public Persona findPersonaById(int id) {
 		return dao.findPersonaById(id);
 	}
 
-
-	//Parte presada DOcumentoService da esercitazione COrretta usa Hoibernate per mettere i 3 metodi sotto
 	public List<Persona> findAll() {
 		return this.dao.findAll();
 	}
+	
+	
+	private static Persona createPersonaFromUserInput(Scanner scanner) {
+		
+		Persona persona = new Persona();
 
-	/*Da rivedere*/
-	public Persona creaPersona(Scanner s, int id) {//Persona per
+		Scanner in = new Scanner(System.in);
 		
-		
-			
-		String nome, cognome, dataNascita, recapitoTelefonico, indirizzoResidenza;
-		
-		System.out.println("Crea persona");
+		System.out.print("Inserire nome della persona: ");
+		persona.setNome(in.nextLine());
 
-		System.out.println("Inserisci il nome:");
-		nome = s.nextLine();
+		System.out.print("Inserire cognome della persona: ");
+		persona.setCognome(in.nextLine());
 		
-		System.out.println("Inserisci il cognome:");
-		cognome = s.nextLine();
+		System.out.println("Inserisci numero telefonico");
+		persona.setRecapito_telefonico(in.nextLine());
 		
-		System.out.println("Inserisci la data di nascita:");
-		dataNascita = s.nextLine();
+		System.out.println("Inserisci indirizzo di residenza");
+		persona.setIndirizzo_residenza(in.nextLine());
 		
-		System.out.println("Inserisci il recapito telefonico:");
-		recapitoTelefonico = s.nextLine();
-		
-		System.out.println("Inserisci l'indirizzo di residenza:");
-		indirizzoResidenza = s.nextLine();
-		
-		Persona persona = new Persona();//si collega a metodo Set Persona parameters
-		persona.setNome(nome);
-		persona.setCognome(cognome);
-		persona.setDataNascita(dataNascita);//da rivedere in Persona entity ecc...
-		persona.setTel(recapitoTelefonico);
-		persona.setIndirizzo(indirizzoResidenza);
-		persona.setId(7);
-		persona.setCreationTime(new Date());
-		persona.setCreationUser("Amministratore");
-		
-		dao.creaPersona(persona);
-		
-		return persona;	
-		
-		
-		/*mio*/
-		/*
-		System.out.println("Inseerisci nome Persona:");
-		//s.nextLine();
-		
-		per.setNome(s.nextLine());
-		
-		per.setCreationTime(new Date());
-		per.setCreationUser("system");
-
-		dao.creaPersona(per);
-		*/
+		dao.save(persona);
+		return persona;
 	}
 	
-	/*Da rivedere*/
-	public Persona modificaPersona (Scanner s, int id) {
+	public Persona modificaPersona (Scanner s, int id) throws ParseException {
 		String nome, cognome, dataNascita, recapitoTelefonico, indirizzoResidenza;
 		
 		System.out.println("Inserisci l'id della persona da modifcare: " + id);
@@ -151,11 +114,11 @@ public class PersonaService {//implements Iterator <Persona>
 		persona.setNome(nome);
 		persona.setCognome(cognome);
 		persona.setDataNascita(dataNascita);
-		persona.setTel(recapitoTelefonico);
-		persona.setIndirizzo(indirizzoResidenza);
+		persona.setRecapito_telefonico(recapitoTelefonico);
+		persona.setIndirizzo_residenza(indirizzoResidenza);
 		persona.setId(id);
-		persona.setCreationUser("Amministratore");
-		persona.setCreationTime(new Date());
+		persona.setCreation_user("Amministratore");
+		persona.setCreation_time(new Date());
 		
 		dao.updatePersona(persona);
 		
@@ -165,31 +128,39 @@ public class PersonaService {//implements Iterator <Persona>
 	}
 	
 	public void savePersona(Persona persona) {
-		//Da controllare
-		/*persona.setValidFrom(new Date());
-		  persona.setValidTo(DateUtils.addDays(new Date(), 100));
 
-		 */
-
-		persona.setCreationUser("system");
-		persona.setCreationTime(new Date());
+		persona.setCreation_user("system");
+		persona.setCreation_time(new Date());
 
 		dao.save(persona);
 	}
 	
-	/*Da controllare se giusto!!*/
-	public void eliminaPersona(int idPer, List<Persona> persone) {
-		Scanner n = new Scanner (System.in);
-		//PersonaService pser = new PersonaService();
-		Persona p = findPersonaById(idPer);
-		
-		dao.eliminaPersona(idPer);
-		
-		for(Persona persona : persone) {
-			if(persona.equals(p)){
+	public void removePerson(int id, List<Persona> persone) {
+		Scanner scanner = new Scanner(System.in);
+		PersonaService ps = new PersonaService();
+		ps.eliminaPersona(id);
+		Persona p = ps.findPersonaById(id);
+	
+		for(Persona persona: persone)
+		{
+			if(persona.equals(p))
+			{
 				persone.remove(persona);
 			}
 		}
+		
+		 Persona dao = new Persona();
+		    dao.setId(id);
+		    Object sessionFactory;
+			Session  session=((Object) sessionFactory).getCurrentSession();
+				session.delete(dao);
+	}
+	
+	public void eliminaPersona(int id) {
+
+		System.out.println("Elimina persona n° " + id);
+
+		dao.eliminaPersona(id);
 	}
 	
 	/*Metodo stampaLista che si collega a Utils (stampa lista persone arraylist) */
@@ -201,7 +172,19 @@ public class PersonaService {//implements Iterator <Persona>
 		
 		it.jac.javadb.util.Utils u = new it.jac.javadb.util.Utils();
 		
-		u.stampaListaPersone(Arrays.asList(persona));
+		//u.stampaListaPersone(Arrays.asList(persona)); vedi util in fondo
+	}
+
+
+
+
+
+	public void creaPersona(List<Persona> persone) throws ParseException {
+		Scanner scanner = new Scanner(System.in);
+		PersonaService ps = new PersonaService();
+		Persona persona = ps.createPersonaFromUserInput(scanner);
+		persone.add(persona);
+		
 	}
 
 }

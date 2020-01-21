@@ -1,5 +1,6 @@
 package it.jac.javadb.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,7 +14,7 @@ import it.jac.javadb.dao.VaccinazioneDao;*/
 
 @Entity
 @Table (name="vaccinato")
-public class Vaccinato {
+public class Vaccinato implements Serializable{
 	
 	/*
 	private static final PersonaDao perdao = new PersonaDao();

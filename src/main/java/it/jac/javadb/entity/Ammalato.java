@@ -1,6 +1,7 @@
 /* DA VEDERE FUNZIONAMENTO CON ALTRE CLASSI */
 package it.jac.javadb.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ammalato")
-public class Ammalato {
+public class Ammalato implements Serializable{
 	
 	@Id
 	@Column(name="idmalattia")

@@ -3,6 +3,7 @@ package it.jac.javadb.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,6 +15,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import it.jac.javadb.entity.Malattia;
 import it.jac.javadb.entity.Persona;
 //import it.jac.javadb.esercitazione.entity.Documento;
 import it.jac.javadb.util.HibernateUtil;
@@ -32,6 +34,9 @@ public class PersonaDao {
 
 	private static final Logger log = LogManager.getLogger(PersonaDao.class);
 
+
+	
+	/*
 	public boolean testConnessione() {
 
 		log.debug("try to open session");
@@ -47,38 +52,44 @@ public class PersonaDao {
 
 		return result;
 	}
+	*/
+	
+	/*FORSE DA ELIMINARE SE SALVA OGGETTO SU DB!!!
 
 	//Metodi ni riferimento a PersonaService
 
 	/*Metodo crea Persona in Tabella DB da completare con Hibernate SQL*/
-	public List<Persona> creaPersona(Persona persona) {
+	/*public Persona creaPersona(Persona persona) throws ParseException{
 		Scanner n = new Scanner(System.in);
 		Transaction tx = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		
+		
 		try  {
 			
 			tx = session.beginTransaction();
 			//Persona persona = new Persona()
 			
 			Query<Persona> query = session
-					.createQuery("INSERT INTO Persona", Persona.class);
+					.createQuery("INSERT INTO Persona", Persona.class);//id, nome, cognome, data_nascita, recapito_telefonico, indirizzo_residenza, creation_time, creation_user
 			System.out.println("Inserisci id persona:");
-			query.setParameter(1, persona.getId()); 
+			query.setParameter(0, persona.getId()); 
 			//query.setParameter(position, value)
 			System.out.println("Inserisci nome persona:");
-			query.setParameter(2, persona.getNome());
+			query.setParameter(1, persona.getNome());
 			System.out.println("Inserisci cognome persona:");
-			query.setParameter(3, persona.getCognome());
+			query.setParameter(2, persona.getCognome());
 			System.out.println("Inserisci data di nascita persona:");
-			query.setParameter(4, persona.getNascita());
+			query.setParameter(3, persona.getData_nascita());
 			System.out.println("Inserisci numero di telefono della persona:");
-			query.setParameter(5, persona.getTel());
+			query.setParameter(4, persona.getRecapito_telefonico());
 			System.out.println("Inserisci indirizzo di residenza della persona:");
-			query.setParameter(6, persona.getIndirizzo());
+			query.setParameter(5, persona.getIndirizzo_residenza());
 			System.out.println("Inserimento automatico dell'ora alla creazione dell record");
-			query.setParameter(7, new java.sql.Timestamp(persona.getCreationTime().getTime()));//.getTime()
+			query.setParameter(6, new java.sql.Timestamp(persona.getCreation_time().getTime()));//.getTime()
 			System.out.println("Inserimento automatico dell'utente alla creazione dell record");
-			query.setParameter(8, persona.getCreationUser());
+			query.setParameter(7, persona.getCreation_user());
 			
 			//List<Persona> list = query.list();
 
@@ -86,15 +97,19 @@ public class PersonaDao {
 
 			
 			tx.commit();
-			return query.list();
+			return (Persona) query.list();
 	      } catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
 	      } finally {
 	         session.close(); 
 	      }
-	      //return persona;
-	   }
+	      return persona;
+	      
+	      
+	      
+	      
+	   }*/
 	
 
 	/*Trova Persona tramite Id*/
@@ -145,34 +160,50 @@ public class PersonaDao {
 	}
 	
 	
-	/*da completare con query*/
-	public void eliminaPersona(int idPer) {
+	public void eliminaPersona(int id) {
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
 			Transaction tx = session.beginTransaction();
 
-			session.delete(idPer);
+			session.delete(id);
 
 			tx.commit();
 		}
 	}
 
 	/*Trova tutte le persone*/
-	public List<Persona> findAll() {
+	public List<Malattia> findAll() {
 
 		log.debug("try to find all entities");
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-			NativeQuery<Persona> query = session.createNativeQuery("select * from persona", Persona.class);
+			NativeQuery<Malattia> query = session.createNativeQuery("select * from malattia", Malattia.class);
 
-			List<Persona> list = query.list();
+			List<Malattia> list = query.list();
 
 			log.debug("found [" + list.size() + "] entities");
 
 			return list;
 		}
+	}
+
+
+	public boolean testConnessione() {
+		log.debug("try to open session");
+
+		boolean result = false;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+			if (session != null) {
+				result = true;
+			}
+		}
+		log.debug("result " + result);
+
+		return result;
+		
 	}
 
 
