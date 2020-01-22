@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
 import it.jac.javadb.dao.PersonaDao;
+import it.jac.javadb.entity.Malattia;
 import it.jac.javadb.entity.Persona;
 import it.jac.javadb.service.PersonaService;
 import it.jac.javadb.util.DaoFactory;
@@ -85,6 +86,9 @@ public class PersonaService {//implements Iterator <Persona>
 		
 		System.out.println("Inserisci indirizzo di residenza");
 		persona.setIndirizzo_residenza(in.nextLine());
+		
+		persona.setCreation_user("Amministratore");
+		persona.setCreation_time(new Date());
 		
 		dao.save(persona);
 		return persona;

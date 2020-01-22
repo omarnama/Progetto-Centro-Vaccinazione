@@ -1,8 +1,6 @@
 package it.jac.javadb.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +10,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 
 import it.jac.javadb.entity.Malattia;
-import it.jac.javadb.entity.Persona;
 import it.jac.javadb.util.HibernateUtil;
 
 public class MalattiaDao {
@@ -22,7 +19,7 @@ public class MalattiaDao {
 	private static final Logger log = LogManager.getLogger(MalattiaDao.class);
 
 	/*Trova Persona tramite Id*/
-	public Malattia findPersonaById (int id) {
+	public Malattia findMalattiaById (int id) {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()){
 			return session.find(Malattia.class, id);
 		}
@@ -30,7 +27,7 @@ public class MalattiaDao {
 	
 	public void save(Malattia malattia) {
 
-		log.debug("try to save item " + malattia);
+		log.debug("try to save malattia " + malattia);
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
@@ -42,10 +39,6 @@ public class MalattiaDao {
 	
 	
 	public void updateMalattia(Malattia malattia) {//Metodo Update per updatePersona in PersonaService
-		/*
-		Transaction tx = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		*/
 		log.debug("try to update malattia " + malattia);
 		
 
@@ -56,10 +49,10 @@ public class MalattiaDao {
 				
 				session.update(malattia);
 				tx.commit();
-				log.debug("persona updated");
+				log.debug("malattia updated");
 
 			} catch(Exception e) {
-				log.error("Error updating persona", e);
+				log.error("Error updating malattia", e);
 				tx.rollback();
 			}
 		}

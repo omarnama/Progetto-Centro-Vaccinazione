@@ -52,16 +52,16 @@ public class Malattia {
 		private String nome;
 		
 		@Column(name = "creation_user", length = 20)
-		private String creationUser;
+		private String creation_user;
 		
 		@Column(name = "update_user", length = 20)
-		private String updateUser;
+		private String update_user;
 		
 		@Column(name = "creation_time")
-		private Date creationTime;
+		private Date creation_time;
 		
 		@Column(name = "update_time")
-		private Date updateTime;
+		private Date update_time;
 		
 		public int getId() {
 			return id;
@@ -88,35 +88,35 @@ public class Malattia {
 		}
 		
 		public String getCreationUser() {
-			return creationUser;
+			return creation_user;
 		}
 		
-		public void setCreationUser(String creationUser) {
-			this.creationUser = creationUser;
+		public void creation_user(String creation_user) {
+			this.creation_user = creation_user;
 		}
 		
-		public String getUpdateUser() {
-			return updateUser;
+		public String getUpdate_user() {
+			return update_user;
 		}
 		
-		public void setUpdateUser(String updateUser) {
-			this.updateUser = updateUser;
+		public void setUpdate_user(String updateUser) {
+			this.update_user = updateUser;
 		}
 		
-		public Date getCreationTime() {
-			return creationTime;
+		public Date getCreation_time() {
+			return creation_time;
 		}
 		
-		public void setCreationTime(Date creationTime) {
-			this.creationTime = creationTime;
+		public void setCreation_time(Date creationTime) {
+			this.creation_time = creationTime;
 		}
 		
-		public Date getUpdateTime() {
-			return updateTime;
+		public Date getUpdate_time() {
+			return update_time;
 		}
 		
-		public void setUpdateTime(Date updateTime) {
-			this.updateTime = updateTime;
+		public void setUpdate_time(Date updateTime) {
+			this.update_time = updateTime;
 		}
 		
 		@ManyToMany(fetch = FetchType.LAZY, mappedBy = "malattia")
@@ -130,8 +130,8 @@ public class Malattia {
 		
 		@Override
 		public String toString() {
-			return "[id=" + id + ", tipo=" + tipo + ", nome=" + nome + ", creationUser=" + creationUser
-					+ ", updateUser=" + updateUser + ", creationTime=" + creationTime + ", updateTime=" + updateTime
+			return "[id=" + id + ", tipo=" + tipo + ", nome=" + nome + ", creation_user=" + creation_user
+					+ ", update_user=" + update_user + ", creation_time=" + creation_time + ", update_time=" + update_time
 					+ "]";
 		}
 		
@@ -140,12 +140,12 @@ public class Malattia {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((creationTime == null) ? 0 : creationTime.hashCode());
-			result = prime * result + ((creationUser == null) ? 0 : creationUser.hashCode());
+			result = prime * result + ((creation_time == null) ? 0 : creation_time.hashCode());
+			result = prime * result + ((creation_user == null) ? 0 : creation_user.hashCode());
 			result = prime * result + id;
 			result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
-			result = prime * result + ((updateTime == null) ? 0 : updateTime.hashCode());
-			result = prime * result + ((updateUser == null) ? 0 : updateUser.hashCode());
+			result = prime * result + ((update_time == null) ? 0 : update_time.hashCode());
+			result = prime * result + ((update_user == null) ? 0 : update_user.hashCode());
 			return result;
 		}
 		
@@ -159,15 +159,15 @@ public class Malattia {
 			if (getClass() != obj.getClass())
 				return false;
 			Malattia other = (Malattia) obj;
-			if (creationTime == null) {
-				if (other.creationTime != null)
+			if (creation_time == null) {
+				if (other.creation_time != null)
 					return false;
-			} else if (!creationTime.equals(other.creationTime))
+			} else if (!creation_time.equals(other.creation_time))
 				return false;
-			if (creationUser == null) {
-				if (other.creationUser != null)
+			if (creation_user == null) {
+				if (other.creation_user != null)
 					return false;
-			} else if (!creationUser.equals(other.creationUser))
+			} else if (!creation_user.equals(other.creation_user))
 				return false;
 			if (id != other.id)
 				return false;
@@ -181,15 +181,15 @@ public class Malattia {
 					return false;
 			} else if (!tipo.equals(other.tipo))
 				return false;
-			if (updateTime == null) {
-				if (other.updateTime != null)
+			if (update_time == null) {
+				if (other.update_time != null)
 					return false;
-			} else if (!updateTime.equals(other.updateTime))
+			} else if (!update_time.equals(other.update_time))
 				return false;
-			if (updateUser == null) {
-				if (other.updateUser != null)
+			if (update_user == null) {
+				if (other.update_user != null)
 					return false;
-			} else if (!updateUser.equals(other.updateUser))
+			} else if (!update_user.equals(other.update_user))
 				return false;
 			return true;
 		}

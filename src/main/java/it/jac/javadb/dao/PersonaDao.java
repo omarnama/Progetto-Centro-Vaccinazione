@@ -173,15 +173,15 @@ public class PersonaDao {
 	}
 
 	/*Trova tutte le persone*/
-	public List<Malattia> findAll() {
+	public List<Persona> findAll() {
 
 		log.debug("try to find all entities");
 
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-			NativeQuery<Malattia> query = session.createNativeQuery("select * from malattia", Malattia.class);
+			NativeQuery<Persona> query = session.createNativeQuery("select * from persona", Persona.class);
 
-			List<Malattia> list = query.list();
+			List<Persona> list = query.list();
 
 			log.debug("found [" + list.size() + "] entities");
 

@@ -9,7 +9,7 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
+import it.jac.javadb.dao.MalattiaDao;
 import it.jac.javadb.dao.PersonaDao;
 import it.jac.javadb.entity.Persona;
 import it.jac.javadb.MainApp;
@@ -53,8 +53,8 @@ public class MainApp {
 	public static PersonaService ps = new PersonaService();
 
 	public static List<Persona> persone = new ArrayList<Persona>(10);
-	/*public static List<Malattia> malattie = new ArrayList<Malattia>(10);
-	public static List<Vaccino> vaccini = new ArrayList<Vaccino>(10);
+	public static List<Malattia> malattie = new ArrayList<Malattia>(10);
+	/*public static List<Vaccino> vaccini = new ArrayList<Vaccino>(10);
 	public static List<Vaccinazione> vaccinazioni = new ArrayList<Vaccinazione>(10);*/
 	static final private Scanner in = new Scanner(System.in);
 	
@@ -174,6 +174,84 @@ public class MainApp {
 					System.out.println("Inserisci l'id della persona da cercare: ");
 					int id = in.nextInt();
 					Persona p = ps.findPersonaById(id);
+					System.out.println(p);
+					break;
+				}
+
+				default: {
+					System.out.println("Scelta non valida ");
+					break;
+				}
+				}
+			}while (scelta != ESCI);
+		}
+		if (s.equals("malattie")) {
+
+			do {
+				scelta = getChoice();
+
+				MalattiaService ms = new MalattiaService();
+				MalattiaDao dao = new MalattiaDao();
+
+				switch (scelta) {
+				
+				case DBConnection: {
+					
+					
+					
+					/*
+					HibernateUtil.getSessionFactory();
+					System.out.println("Test connessione");
+					//PersonaDao dao1 = DaoFactory.createItemNativeDao();
+					
+					boolean test = dao.testConnessione();
+					if (test) {
+					
+						log.info("Test OK");
+					}*/
+					break;
+				}
+				
+				case STAMPALISTA: {
+					malattie = dao.findAll();
+
+					for (int i = -1; i < malattie.size() - 1; i++) {
+						if (hasNext(malattie)) {
+							MainApp mn = new MainApp();
+							System.out.println(mn.next(malattie));
+						} else {
+							System.out.println("Lista terminata");
+						}
+					}
+
+					break;
+				}
+
+				case AGGIUNGI: {
+					ms.creaMalattia(malattie);
+					break;
+				}
+
+				case MODIFICA: {
+					malattie = ms.findAll();
+					System.out.println("Inserisci l'id della malattia da modificare: ");
+					int id = in.nextInt();
+					Malattia m = ms.modificaMalattia(in, id);
+					malattie.set(id - 1, m);
+					break;
+				}
+
+				case ELIMINA: {
+					System.out.println("Inserisci l'id della persona da eliminare: ");
+					int id = in.nextInt();
+					ms.eliminaMalattia(id);
+					break;
+				}
+
+				case CERCA: {
+					System.out.println("Inserisci l'id della malattia da cercare: ");
+					int id = in.nextInt();
+					Malattia p = ms.findMalattiaById(id);
 					System.out.println(p);
 					break;
 				}
