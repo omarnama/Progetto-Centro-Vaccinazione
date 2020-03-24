@@ -112,7 +112,7 @@ public class PersonaService {//implements Iterator <Persona>
 		recapitoTelefonico = s.next();
 		
 		System.out.println("Inserisci indirizzo di residenza");
-		indirizzoResidenza = s.nextLine();
+		indirizzoResidenza = s.next();
 		
 		Persona persona = new Persona();
 		persona.setNome(nome);

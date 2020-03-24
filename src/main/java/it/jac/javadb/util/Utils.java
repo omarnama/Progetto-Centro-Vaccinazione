@@ -26,9 +26,9 @@ public class Utils {
 			.append("|")
 			.append(StringUtils.rightPad(bean.getNome(), 30))
 			.append("|")
-			.append(StringUtils.rightPad(bean.getTel(), 50))
+			.append(StringUtils.rightPad(bean.getId(), 50))
 			.append("|")
-			.append(StringUtils.rightPad(bean.getIndirizzo(), 50));
+			.append(StringUtils.rightPad(bean.getIndirizzo_residenza(), 50));
 			//.append("|")
 			//.append(StringUtils.rightPad(bean.getCreationTime()))
 			//.append("|")

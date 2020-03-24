@@ -84,7 +84,7 @@ public class MalattiaService {
 	public void removeMalattia(int id, List<Malattia> malattie) {
 		Scanner scanner = new Scanner(System.in);
 		MalattiaService ps = new MalattiaService();
-		ps.eliminaMalttia(id);
+		ps.eliminaMalattia(id);
 		Malattia p = ps.findMalattiaById(id);
 	
 		for(Malattia malattia: malattie)
